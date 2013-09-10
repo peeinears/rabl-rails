@@ -34,11 +34,12 @@ module RablRails
     # context
     #
     class Context
-      attr_reader :format
+      attr_reader :format, :hash
 
       def initialize(path, options)
         @virtual_path = path
         @format = options.delete(:format) || 'json'
+        @hash = options.delete(:hash) || false
         @_assigns = {}
         @options = options
 
@@ -50,7 +51,7 @@ module RablRails
       end
 
       def params
-        { format: format }
+        { format: format, hash: hash }
       end
 
       def lookup_context
